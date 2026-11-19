@@ -13,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -41,14 +42,14 @@ public class SecurityConfig {
         http.httpBasic(Customizer.withDefaults());    //--- this used for avoid to show the login page in postman like testing tools
         http.sessionManagement(session->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));//---if you the default login page means this gives again
-                                                                                //and again login so comment the default login page code from securityfilterChain
+                                                                                //and again login so comment the default login page code from security filterChain
         return http.build();
     }
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider provider=new DaoAuthenticationProvider(userDetailsService);//Dao->data access layer
-        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+        provider.setPasswordEncoder(new BCryptPasswordEncoder(12));//(NoOpPasswordEncoder.getInstance());
 //        provider.setUserDetailsService(userDetailsService);
         return provider;
     }
