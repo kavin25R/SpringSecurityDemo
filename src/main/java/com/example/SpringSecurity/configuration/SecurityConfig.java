@@ -36,6 +36,9 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth-> auth
 //                .requestMatchers("/hello","/home","/home").permitAll()
 //                .requestMatchers("/students").authenticated()
+                  .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasAnyRole("ADMIN","USER")
+                        .requestMatchers("/public/**").permitAll()
                         .anyRequest().authenticated()
         );
         //http.formLogin(Customizer.withDefaults());   --- for default login page

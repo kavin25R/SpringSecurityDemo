@@ -9,6 +9,15 @@ public class Users {
     private long id;
     private String userName;
     private String password;
+    private String roll;
+
+    public String getRoll() {
+        return roll;
+    }
+
+    public void setRoll(String roll) {
+        this.roll = roll;
+    }
 
     public long getId() {
         return id;

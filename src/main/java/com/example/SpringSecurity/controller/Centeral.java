@@ -16,8 +16,14 @@ public class Centeral {
         return "Home Page "+request.getSession().getId();
     }
 
-    @GetMapping("/about")
+    @GetMapping("/admin/about")
     public String about(){
         return "About page";
     }
+
+    @GetMapping("/public/demo")
+    public String demo(){
+        return "Public demo Page";
+    }
+
 }
